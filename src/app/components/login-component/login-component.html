@@ -1,0 +1,22 @@
+<div class="login-wrapper">
+    <form class="card login-card" [formGroup]="form" (ngSubmit)="submit()">
+    <h2>Global Invoice</h2>
+    <p class="subtitle">Inicia sesión para continuar</p>
+
+    <label>Usuario</label>
+    <input type="text" formControlName="username" placeholder="operador o auditor" />
+
+    <label>Contraseña</label>
+    <input type="password" formControlName="password" placeholder="••••••••" />
+
+    @if (errorMessage()) {
+        <p class="error-text">{{ errorMessage() }}</p>
+    }
+
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid || loading()">
+        {{ loading() ? 'Ingresando...' : 'Ingresar' }}
+    </button>
+
+    <p class="hint">Demo: operador/operador123 · auditor/auditor123</p>
+    </form>
+</div>

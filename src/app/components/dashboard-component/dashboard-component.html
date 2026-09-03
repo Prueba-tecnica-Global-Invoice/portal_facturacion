@@ -1,0 +1,31 @@
+<app-navbar-component></app-navbar-component>
+
+<div class="page">
+  <h2>Dashboard de Cobranza</h2>
+
+  <div class="kpis">
+    <div class="card kpi">
+      <span class="kpi-label">Total Facturado</span>
+      <span class="kpi-value">$ {{ store.summary().totalFacturado | number: '1.2-2' }}</span>
+    </div>
+    <div class="card kpi">
+      <span class="kpi-label">Total a Cobrar</span>
+      <span class="kpi-value">$ {{ store.summary().totalACobrar | number: '1.2-2' }}</span>
+    </div>
+    <div class="card kpi kpi-danger">
+      <span class="kpi-label">Total Vencido</span>
+      <span class="kpi-value">$ {{ store.summary().totalVencido | number: '1.2-2' }}</span>
+    </div>
+  </div>
+
+  <div class="card chart-card">
+    <h3>Monto Facturado por Tipo de Factura</h3>
+    @if (store.all().length > 0) {
+      <div class="chart-wrapper">
+        <canvas baseChart [data]="chartData()" [options]="chartOptions" type="pie"></canvas>
+      </div>
+    } @else {
+      <p class="empty">Aún no hay facturas registradas.</p>
+    }
+  </div>
+</div>

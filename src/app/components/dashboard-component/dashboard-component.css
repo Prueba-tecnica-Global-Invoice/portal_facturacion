@@ -1,0 +1,49 @@
+.page {
+    padding: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.kpi {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.kpi-label {
+    font-size: 13px;
+    color: #7b8794;
+    font-weight: 600;
+}
+
+.kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2933;
+}
+
+.kpi-danger .kpi-value {
+    color: #e2574c;
+}
+
+.chart-card h3 {
+    margin-top: 0;
+}
+
+.chart-wrapper {
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.empty {
+    text-align: center;
+    color: #9aa5b1;
+    padding: 24px;
+}

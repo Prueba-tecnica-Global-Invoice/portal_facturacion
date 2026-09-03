@@ -1,0 +1,96 @@
+<app-navbar-component></app-navbar-component>
+
+<div class="page">
+  <div class="page-header">
+    <h2>Facturas</h2>
+    @if (auth.hasRole('OPERADOR')) {
+      <button class="btn btn-primary" (click)="toggleForm()">
+        {{ showForm() ? 'Cancelar' : '+ Nueva factura' }}
+      </button>
+    }
+  </div>
+
+  @if (showForm() && auth.hasRole('OPERADOR')) {
+    <form class="card form-card" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="grid">
+        <div>
+          <label>Número</label>
+          <input type="text" formControlName="numero" placeholder="A-1001" />
+        </div>
+
+        <div>
+          <label>Tipo de factura</label>
+          <select formControlName="tipo">
+            <option value="NACIONAL">Nacional</option>
+            <option value="EXPORTACION">Exportación</option>
+            <option value="GUBERNAMENTAL">Gubernamental</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Subtotal</label>
+          <input type="number" formControlName="subtotal" placeholder="100000" />
+        </div>
+
+        <div>
+          <label>Fecha de emisión</label>
+          <input type="date" formControlName="fechaEmision" />
+        </div>
+
+        <div>
+          <label>Fecha de vencimiento</label>
+          <input type="date" formControlName="fechaVencimiento" />
+        </div>
+
+        <!-- RF-02: este campo solo existe en el DOM (y en el FormGroup) cuando tipo == EXPORTACION -->
+        @if (esExportacion) {
+          <div>
+            <label>Código Aduanero</label>
+            <input type="text" formControlName="codigoAduanero" placeholder="COD-1234" />
+          </div>
+        }
+      </div>
+
+      @if (errorMessage()) {
+        <p class="error-text">{{ errorMessage() }}</p>
+      }
+
+      <button class="btn btn-primary" type="submit" [disabled]="loading()">
+        {{ loading() ? 'Creando...' : 'Crear factura' }}
+      </button>
+    </form>
+  }
+
+  <div class="card table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Factura</th>
+          <th>Tipo</th>
+          <th>Total a pagar</th>
+          <th>A cobrar</th>
+          <th>Vencimiento</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (invoice of store.all(); track invoice.id) {
+          <tr>
+            <td>{{ invoice.numero }}</td>
+            <td>{{ invoice.tipo }}</td>
+            <td>{{ invoice.totalAPagar | number: '1.2-2' }}</td>
+            <td>{{ invoice.montoACobrar | number: '1.2-2' }}</td>
+            <td>{{ invoice.fechaVencimiento }}</td>
+            <td>
+              <span class="badge" [class]="'badge-' + invoice.estado.toLowerCase()">
+                {{ invoice.estado }}
+              </span>
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="6" class="empty">No hay facturas registradas todavía.</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
