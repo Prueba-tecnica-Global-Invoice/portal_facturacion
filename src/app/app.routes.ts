@@ -7,7 +7,6 @@ import { DashboardComponent } from './components/dashboard-component/dashboard-c
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'login' },
-    { path: '**', redirectTo: 'login' },
     {
         path: 'login',
         component: LoginComponent
@@ -22,4 +21,5 @@ export const routes: Routes = [
         canActivate: [authGuard],
         component: InvoiceListComponent
     },
+    { path: '**', redirectTo: 'login' },
 ];

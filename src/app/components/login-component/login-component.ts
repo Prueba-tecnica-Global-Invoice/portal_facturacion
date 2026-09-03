@@ -42,6 +42,7 @@ export class LoginComponent {
         console.log(targetRoute);
         this.router.navigate([targetRoute]).then((success) => {
           console.log('¿Navegación exitosa?', success);
+          console.log('URL después de navegar:', this.router.url);
         }).catch((error) => {
           console.error('Error de navegación:', error);
         });

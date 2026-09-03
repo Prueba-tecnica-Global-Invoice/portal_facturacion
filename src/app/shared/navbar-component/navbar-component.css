@@ -1,0 +1,33 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1f2933;
+    color: #fff;
+    padding: 12px 24px;
+}
+
+.brand {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.links a {
+    color: #cbd2d9;
+    text-decoration: none;
+    margin-right: 16px;
+    font-size: 14px;
+}
+
+.links a.active {
+    color: #fff;
+    font-weight: 600;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: #cbd2d9;
+}

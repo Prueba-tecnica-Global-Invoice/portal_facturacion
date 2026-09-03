@@ -1,1 +1,13 @@
-<p>navbar-component works!</p>
+<nav class="navbar">
+      <span class="brand">Global Invoice</span>
+      <div class="links">
+        @if (auth.hasRole('AUDITOR')) {
+          <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        }
+        <a routerLink="/invoices" routerLinkActive="active">Facturas</a>
+      </div>
+      <div class="user">
+        <span>{{ auth.username() }} · {{ auth.roles().join(', ') }}</span>
+        <button class="btn btn-danger" (click)="logout()">Salir</button>
+      </div>
+    </nav>
